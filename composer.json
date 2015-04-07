@@ -1,0 +1,39 @@
+{
+    "name": "forestry/form-validator",
+    "description": "Validation of form data using defined rulesets.",
+    "keywords": [
+        "forestry",
+        "form validation"
+    ],
+    "homepage": "https://github.com/ForestryCodes/form-validator",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Daniel Melzer",
+            "email": "daniel@melzer.ws",
+            "homepage": "http://daniel.melzer.ws",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php" : ">=5.4.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit" : "4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Forestry\\FormValidator\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Forestry\\FormValidator\\Test\\": "tests"
+        }
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.0-dev"
+        }
+    }
+}
