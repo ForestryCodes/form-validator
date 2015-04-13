@@ -13,9 +13,9 @@ class IntegerRuleTest extends \PHPUnit_Framework_TestCase
         $this->rule = new IntegerRule();
     }
 
-    public function textValidRuleInstance()
+    public function testValidRuleInstance()
     {
-        $this->assertInstanceOf('RuleInterface', $this->rule);
+        $this->assertInstanceOf('Forestry\FormValidator\RuleInterface', $this->rule);
     }
 
     public function testValueIsValid()

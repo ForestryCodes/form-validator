@@ -2,15 +2,15 @@
 
 namespace Forestry\FormValidator\Test;
 
-use Forestry\FormValidator\Rule\RequiredRule;
+use Forestry\FormValidator\Rule\UrlRule;
 
-class RequiredRuleTest extends \PHPUnit_Framework_TestCase
+class UrlRuleTest extends \PHPUnit_Framework_TestCase
 {
     private $rule;
 
     public function setUp()
     {
-        $this->rule = new RequiredRule();
+        $this->rule = new UrlRule();
     }
 
     public function testValidRuleInstance()
@@ -18,37 +18,16 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Forestry\FormValidator\RuleInterface', $this->rule);
     }
 
-    public function testValueTrueIsValid()
-    {
-        $result = $this->rule->validate(true);
-
-        $this->assertTrue($result);
-    }
-
-    public function testValueIntIsValid()
-    {
-        $result = $this->rule->validate(0);
-
-        $this->assertTrue($result);
-    }
-
     public function testValueIsValid()
     {
-        $result = $this->rule->validate('on');
-
-        $this->assertTrue($result);
-    }
-
-    public function testValueFloatIsValid()
-    {
-        $result = $this->rule->validate(0.1);
+        $result = $this->rule->validate('http://forestry.codes');
 
         $this->assertTrue($result);
     }
 
     public function testValueIsInvalid()
     {
-        $result = $this->rule->validate('');
+        $result = $this->rule->validate('forestry.codes');
 
         $this->assertFalse($result);
     }
@@ -56,7 +35,7 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
     public function testDefaultMessage()
     {
         $this->assertEquals(
-            'value is not set',
+            'value is not a valid URL',
             $this->rule->getMessage()
         );
     }
@@ -69,4 +48,3 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
         );
     }
 }
- 

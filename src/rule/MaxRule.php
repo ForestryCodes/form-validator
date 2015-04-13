@@ -2,21 +2,22 @@
 
 namespace Forestry\FormValidator\Rule;
 
-use Forestry\FormValidator\SimpleRuleInterface;
+use Forestry\FormValidator\ParameterRuleInterface;
 
-class NumberRule implements SimpleRuleInterface
+class MaxRule implements ParameterRuleInterface
 {
-    private $defaultMessage = 'value is not a valid number';
+    private $defaultMessage = 'value to long';
 
     /**
-     * Validates if the value is valid email address.
+     * Validates if the value is valid alphanumerical value.
      *
      * @param mixed $value
+     * @param integer $length
      * @return boolean
      */
-    public function validate($value)
+    public function validate($value, $length)
     {
-        return (bool)preg_match('/^-?\d+(\.\d+)?$/', $value);
+        return ($length >= strlen(trim($value)));
     }
 
     /**

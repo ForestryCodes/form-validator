@@ -2,21 +2,22 @@
 
 namespace Forestry\FormValidator\Rule;
 
-use Forestry\FormValidator\SimpleRuleInterface;
+use Forestry\FormValidator\ParameterRuleInterface;
 
-class NumberRule implements SimpleRuleInterface
+class SameRule implements ParameterRuleInterface
 {
-    private $defaultMessage = 'value is not a valid number';
+    private $defaultMessage = 'values are not the same';
 
     /**
-     * Validates if the value is valid email address.
+     * Validates if two values are equal.
      *
      * @param mixed $value
+     * @param mixed $compareValue
      * @return boolean
      */
-    public function validate($value)
+    public function validate($value, $compareValue)
     {
-        return (bool)preg_match('/^-?\d+(\.\d+)?$/', $value);
+        return ($value == $compareValue);
     }
 
     /**

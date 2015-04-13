@@ -2,15 +2,15 @@
 
 namespace Forestry\FormValidator\Test;
 
-use Forestry\FormValidator\Rule\RequiredRule;
+use Forestry\FormValidator\Rule\IpRule;
 
-class RequiredRuleTest extends \PHPUnit_Framework_TestCase
+class IpRuleTest extends \PHPUnit_Framework_TestCase
 {
     private $rule;
 
     public function setUp()
     {
-        $this->rule = new RequiredRule();
+        $this->rule = new IpRule();
     }
 
     public function testValidRuleInstance()
@@ -18,37 +18,30 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Forestry\FormValidator\RuleInterface', $this->rule);
     }
 
-    public function testValueTrueIsValid()
+    public function testIpv4IsValid()
     {
-        $result = $this->rule->validate(true);
+        $result = $this->rule->validate('127.0.0.1');
 
         $this->assertTrue($result);
     }
 
-    public function testValueIntIsValid()
+    public function testIpv6IsValid()
     {
-        $result = $this->rule->validate(0);
+        $result = $this->rule->validate('fe00::0');
 
         $this->assertTrue($result);
     }
 
-    public function testValueIsValid()
+    public function testIpv4IsInvalid()
     {
-        $result = $this->rule->validate('on');
+        $result = $this->rule->validate('127.00.1');
 
-        $this->assertTrue($result);
+        $this->assertFalse($result);
     }
 
-    public function testValueFloatIsValid()
+    public function testIpv6IsInvalid()
     {
-        $result = $this->rule->validate(0.1);
-
-        $this->assertTrue($result);
-    }
-
-    public function testValueIsInvalid()
-    {
-        $result = $this->rule->validate('');
+        $result = $this->rule->validate('fg00::0');
 
         $this->assertFalse($result);
     }
@@ -56,7 +49,7 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
     public function testDefaultMessage()
     {
         $this->assertEquals(
-            'value is not set',
+            'value is not a valid IP',
             $this->rule->getMessage()
         );
     }

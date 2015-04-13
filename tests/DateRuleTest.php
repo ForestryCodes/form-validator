@@ -2,15 +2,15 @@
 
 namespace Forestry\FormValidator\Test;
 
-use Forestry\FormValidator\Rule\RequiredRule;
+use Forestry\FormValidator\Rule\DateRule;
 
-class RequiredRuleTest extends \PHPUnit_Framework_TestCase
+class DateRuleTest extends \PHPUnit_Framework_TestCase
 {
     private $rule;
 
     public function setUp()
     {
-        $this->rule = new RequiredRule();
+        $this->rule = new DateRule();
     }
 
     public function testValidRuleInstance()
@@ -18,37 +18,37 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Forestry\FormValidator\RuleInterface', $this->rule);
     }
 
-    public function testValueTrueIsValid()
-    {
-        $result = $this->rule->validate(true);
-
-        $this->assertTrue($result);
-    }
-
-    public function testValueIntIsValid()
-    {
-        $result = $this->rule->validate(0);
-
-        $this->assertTrue($result);
-    }
-
     public function testValueIsValid()
     {
-        $result = $this->rule->validate('on');
+        $result = $this->rule->validate('13.04.2015', 'd.m.Y');
 
         $this->assertTrue($result);
     }
 
-    public function testValueFloatIsValid()
+    public function testDefaultValueIsValid()
     {
-        $result = $this->rule->validate(0.1);
+        $result = $this->rule->validate('2015-04-13');
+
+        $this->assertTrue($result);
+    }
+
+    public function testTimeIsValid()
+    {
+        $result = $this->rule->validate('13:37:42', 'H:i:s');
+
+        $this->assertTrue($result);
+    }
+
+    public function testDateTimeIsValid()
+    {
+        $result = $this->rule->validate('2015-04-13 13:37:42', 'Y-m-d H:i:s');
 
         $this->assertTrue($result);
     }
 
     public function testValueIsInvalid()
     {
-        $result = $this->rule->validate('');
+        $result = $this->rule->validate('2015-04-13', 'Y-m');
 
         $this->assertFalse($result);
     }
@@ -56,7 +56,7 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
     public function testDefaultMessage()
     {
         $this->assertEquals(
-            'value is not set',
+            'value is not a valid date',
             $this->rule->getMessage()
         );
     }

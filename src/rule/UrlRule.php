@@ -4,19 +4,19 @@ namespace Forestry\FormValidator\Rule;
 
 use Forestry\FormValidator\SimpleRuleInterface;
 
-class NumberRule implements SimpleRuleInterface
+class UrlRule implements SimpleRuleInterface
 {
-    private $defaultMessage = 'value is not a valid number';
+    private $defaultMessage = 'value is not a valid URL';
 
     /**
-     * Validates if the value is valid email address.
+     * Validates if the value is valid URL.
      *
      * @param mixed $value
      * @return boolean
      */
     public function validate($value)
     {
-        return (bool)preg_match('/^-?\d+(\.\d+)?$/', $value);
+        return (bool)filter_var($value, \FILTER_VALIDATE_URL);
     }
 
     /**

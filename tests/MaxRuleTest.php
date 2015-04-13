@@ -2,15 +2,15 @@
 
 namespace Forestry\FormValidator\Test;
 
-use Forestry\FormValidator\Rule\RequiredRule;
+use Forestry\FormValidator\Rule\MaxRule;
 
-class RequiredRuleTest extends \PHPUnit_Framework_TestCase
+class MaxRuleTest extends \PHPUnit_Framework_TestCase
 {
     private $rule;
 
     public function setUp()
     {
-        $this->rule = new RequiredRule();
+        $this->rule = new MaxRule();
     }
 
     public function testValidRuleInstance()
@@ -18,37 +18,16 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Forestry\FormValidator\RuleInterface', $this->rule);
     }
 
-    public function testValueTrueIsValid()
-    {
-        $result = $this->rule->validate(true);
-
-        $this->assertTrue($result);
-    }
-
-    public function testValueIntIsValid()
-    {
-        $result = $this->rule->validate(0);
-
-        $this->assertTrue($result);
-    }
-
     public function testValueIsValid()
     {
-        $result = $this->rule->validate('on');
-
-        $this->assertTrue($result);
-    }
-
-    public function testValueFloatIsValid()
-    {
-        $result = $this->rule->validate(0.1);
+        $result = $this->rule->validate('test', 12);
 
         $this->assertTrue($result);
     }
 
     public function testValueIsInvalid()
     {
-        $result = $this->rule->validate('');
+        $result = $this->rule->validate('test', 3);
 
         $this->assertFalse($result);
     }
@@ -56,7 +35,7 @@ class RequiredRuleTest extends \PHPUnit_Framework_TestCase
     public function testDefaultMessage()
     {
         $this->assertEquals(
-            'value is not set',
+            'value to long',
             $this->rule->getMessage()
         );
     }

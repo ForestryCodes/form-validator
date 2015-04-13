@@ -4,9 +4,9 @@ namespace Forestry\FormValidator\Rule;
 
 use Forestry\FormValidator\SimpleRuleInterface;
 
-class NumberRule implements SimpleRuleInterface
+class IpRule implements SimpleRuleInterface
 {
-    private $defaultMessage = 'value is not a valid number';
+    private $defaultMessage = 'value is not a valid IP';
 
     /**
      * Validates if the value is valid email address.
@@ -16,7 +16,7 @@ class NumberRule implements SimpleRuleInterface
      */
     public function validate($value)
     {
-        return (bool)preg_match('/^-?\d+(\.\d+)?$/', $value);
+        return (bool)filter_var($value, \FILTER_VALIDATE_IP);
     }
 
     /**

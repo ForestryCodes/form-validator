@@ -2,9 +2,9 @@
 
 namespace Forestry\FormValidator\Rule;
 
-use Forestry\FormValidator\RuleInterface;
+use Forestry\FormValidator\SimpleRuleInterface;
 
-class RequiredRule implements RuleInterface
+class RequiredRule implements SimpleRuleInterface
 {
     private $defaultMessage = 'value is not set';
 
