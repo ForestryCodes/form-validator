@@ -2,9 +2,9 @@
 
 namespace Forestry\FormValidator\Rule;
 
-use Forestry\FormValidator\RuleInterface;
+use Forestry\FormValidator\SimpleRuleInterface;
 
-class NaturalRule implements RuleInterface
+class NaturalRule implements SimpleRuleInterface
 {
     private $defaultMessage = 'value is not a valid natural number';
 

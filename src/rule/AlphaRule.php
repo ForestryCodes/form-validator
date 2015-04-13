@@ -2,9 +2,9 @@
 
 namespace Forestry\FormValidator\Rule;
 
-use Forestry\FormValidator\RuleInterface;
+use Forestry\FormValidator\SimpleRuleInterface;
 
-class AlphaRule implements RuleInterface
+class AlphaRule implements SimpleRuleInterface
 {
     private $defaultMessage = 'value is not a valid alphabetical value';
 

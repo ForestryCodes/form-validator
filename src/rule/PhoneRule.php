@@ -2,9 +2,9 @@
 
 namespace Forestry\FormValidator\Rule;
 
-use Forestry\FormValidator\RuleInterface;
+use Forestry\FormValidator\SimpleRuleInterface;
 
-class PhoneRule implements RuleInterface
+class PhoneRule implements SimpleRuleInterface
 {
     private $defaultMessage = 'value is not a valid phone number';
 
