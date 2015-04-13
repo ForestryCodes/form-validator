@@ -13,9 +13,9 @@ class FloatRuleTest extends \PHPUnit_Framework_TestCase
         $this->rule = new FloatRule();
     }
 
-    public function textValidRuleInstance()
+    public function testValidRuleInstance()
     {
-        $this->assertInstanceOf('RuleInterface', $this->rule);
+        $this->assertInstanceOf('Forestry\FormValidator\RuleInterface', $this->rule);
     }
 
     public function testValueIsValid()
