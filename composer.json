@@ -23,7 +23,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Forestry\\FormValidator\\": "src"
+            "Forestry\\FormValidator\\": "src",
+            "Forestry\\FormValidator\\Rule\\": "src/rule"
         }
     },
     "autoload-dev": {
