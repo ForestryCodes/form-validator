@@ -2,11 +2,20 @@
 
 namespace Forestry\FormValidator\Rule;
 
+use Forestry\FormValidator\MessageTrait;
 use Forestry\FormValidator\ParameterRuleInterface;
 
 class SameRule implements ParameterRuleInterface
 {
-    private $defaultMessage = 'values are not the same';
+    use MessageTrait;
+
+    /**
+     * Set default message for this rule.
+     */
+    public function __construct()
+    {
+        $this->defaultMessage = 'values are not the same';
+    }
 
     /**
      * Validates if two values are equal.
@@ -18,22 +27,5 @@ class SameRule implements ParameterRuleInterface
     public function validate($value, $compareValue)
     {
         return ($value == $compareValue);
-    }
-
-    /**
-     * Gets the error message for this rule.
-     *
-     * @param mixed $customMessage
-     * @return string
-     */
-    public function getMessage($customMessage = null)
-    {
-        if (!empty($customMessage)) {
-            $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
-        }
-
-        return $message;
     }
 }

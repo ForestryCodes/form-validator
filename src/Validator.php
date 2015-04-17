@@ -126,15 +126,9 @@ class Validator
 
             $rules = explode('|', $rules);
             foreach ($rules as $rule) {
-                $customMessage = null;
-                if (false !== strpos($rule, '--')) {
-                    list($rule, $customMessage) = explode('--', $rule, 2);
-                }
-
-                $parameter = null;
-                if (false !== strpos($rule, ':')) {
-                    list($rule, $parameter) = explode(':', $rule, 2);
-                }
+                // Extract custom message and parameter for field.
+                list($rule, $customMessage) = $this->extractRulePartial($rule, '--');
+                list($rule, $parameter) = $this->extractRulePartial($rule, ':');
 
                 $ruleObject = new $this->registeredRules[$rule]();
                 // Handle special rules first.
@@ -180,6 +174,22 @@ class Validator
             }
 
             $return = $message;
+        }
+
+        return $return;
+    }
+
+    /**
+     * Extracts a part of the rule string such as a parameter or custom message.
+     *
+     * @param string $rule
+     * @param string $separator
+     * @return array
+     */
+    private function extractRulePartial($rule, $separator) {
+        $return = [$rule, null];
+        if (false !== strpos($rule, $separator)) {
+            $return = explode($separator, $rule, 2);
         }
 
         return $return;

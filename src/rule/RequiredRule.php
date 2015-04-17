@@ -2,14 +2,23 @@
 
 namespace Forestry\FormValidator\Rule;
 
+use Forestry\FormValidator\MessageTrait;
 use Forestry\FormValidator\SimpleRuleInterface;
 
 class RequiredRule implements SimpleRuleInterface
 {
-    private $defaultMessage = 'value is not set';
+    use MessageTrait;
 
     /**
-     * Validates if the value is boolean.
+     * Set default message for this rule.
+     */
+    public function __construct()
+    {
+        $this->defaultMessage = 'value is not set';
+    }
+
+    /**
+     * Validates if the value is set.
      *
      * @param mixed $value
      * @return boolean
@@ -17,22 +26,5 @@ class RequiredRule implements SimpleRuleInterface
     public function validate($value)
     {
         return !(empty($value) && !is_numeric($value));
-    }
-
-    /**
-     * Gets the error message for this rule.
-     *
-     * @param mixed $customMessage
-     * @return string
-     */
-    public function getMessage($customMessage = null)
-    {
-        if (!empty($customMessage)) {
-            $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
-        }
-
-        return $message;
     }
 }

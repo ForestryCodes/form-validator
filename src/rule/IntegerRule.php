@@ -2,14 +2,23 @@
 
 namespace Forestry\FormValidator\Rule;
 
+use Forestry\FormValidator\MessageTrait;
 use Forestry\FormValidator\SimpleRuleInterface;
 
 class IntegerRule implements SimpleRuleInterface
 {
-    private $defaultMessage = 'value is not a valid integer';
+    use MessageTrait;
 
     /**
-     * Validates if the value is valid email address.
+     * Set default message for this rule.
+     */
+    public function __construct()
+    {
+        $this->defaultMessage = 'value is not a valid integer';
+    }
+
+    /**
+     * Validates if the value is an integer value.
      *
      * @param mixed $value
      * @return boolean
@@ -17,22 +26,5 @@ class IntegerRule implements SimpleRuleInterface
     public function validate($value)
     {
         return (bool)filter_var($value, \FILTER_VALIDATE_INT);
-    }
-
-    /**
-     * Gets the error message for this rule.
-     *
-     * @param mixed $customMessage
-     * @return string
-     */
-    public function getMessage($customMessage = null)
-    {
-        if (!empty($customMessage)) {
-            $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
-        }
-
-        return $message;
     }
 }

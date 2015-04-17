@@ -2,15 +2,24 @@
 
 namespace Forestry\FormValidator\Rule;
 
+use Forestry\FormValidator\MessageTrait;
 use Forestry\FormValidator\ParameterRuleInterface;
 
 class DateRule implements ParameterRuleInterface
 {
+    use MessageTrait;
     private $defaultFormat = 'Y-m-d';
-    private $defaultMessage = 'value is not a valid date';
 
     /**
-     * Validates if the value is valid alphanumerical value.
+     * Set default message for this rule.
+     */
+    public function __construct()
+    {
+        $this->defaultMessage = 'value is not a valid date';
+    }
+
+    /**
+     * Validates if the value is a valid date and/or time value.
      *
      * @param mixed $value
      * @param mixed $format
@@ -21,27 +30,11 @@ class DateRule implements ParameterRuleInterface
         if (is_null($format)) {
             $format = $this->defaultFormat;
         }
-        $date = \DateTime::createFromFormat($format, $value);
-        $warnings = \DateTime::getLastErrors()['warning_count'];
-        $errors = \DateTime::getLastErrors()['error_count'];
+        $date = new \DateTime();
+        $date->createFromFormat($format, $value);
+        $warnings = $date->getLastErrors()['warning_count'];
+        $errors = $date->getLastErrors()['error_count'];
 
         return $date && 0 == $warnings && 0 == $errors;
-    }
-
-    /**
-     * Gets the error message for this rule.
-     *
-     * @param mixed $customMessage
-     * @return string
-     */
-    public function getMessage($customMessage = null)
-    {
-        if (!empty($customMessage)) {
-            $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
-        }
-
-        return $message;
     }
 }

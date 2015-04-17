@@ -2,14 +2,23 @@
 
 namespace Forestry\FormValidator\Rule;
 
+use Forestry\FormValidator\MessageTrait;
 use Forestry\FormValidator\SimpleRuleInterface;
 
 class UrlRule implements SimpleRuleInterface
 {
-    private $defaultMessage = 'value is not a valid URL';
+    use MessageTrait;
 
     /**
-     * Validates if the value is valid URL.
+     * Set default message for this rule.
+     */
+    public function __construct()
+    {
+        $this->defaultMessage = 'value is not a valid URL';
+    }
+
+    /**
+     * Validates if the value is a valid URL.
      *
      * @param mixed $value
      * @return boolean
@@ -17,22 +26,5 @@ class UrlRule implements SimpleRuleInterface
     public function validate($value)
     {
         return (bool)filter_var($value, \FILTER_VALIDATE_URL);
-    }
-
-    /**
-     * Gets the error message for this rule.
-     *
-     * @param mixed $customMessage
-     * @return string
-     */
-    public function getMessage($customMessage = null)
-    {
-        if (!empty($customMessage)) {
-            $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
-        }
-
-        return $message;
     }
 }
