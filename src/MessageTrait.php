@@ -16,10 +16,9 @@ trait MessageTrait
      */
     public function getMessage($customMessage = null)
     {
+        $message = $this->defaultMessage;
         if (!empty($customMessage)) {
             $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
         }
 
         return $message;
