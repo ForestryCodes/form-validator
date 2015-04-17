@@ -2,14 +2,23 @@
 
 namespace Forestry\FormValidator\Rule;
 
+use Forestry\FormValidator\MessageTrait;
 use Forestry\FormValidator\SimpleRuleInterface;
 
 class FloatRule implements SimpleRuleInterface
 {
-    private $defaultMessage = 'value is not a valid float';
+    use MessageTrait;
 
     /**
-     * Validates if the value is valid email address.
+     * Set default message for this rule.
+     */
+    public function __construct()
+    {
+        $this->defaultMessage = 'value is not a valid float';
+    }
+
+    /**
+     * Validates if the value is a float value.
      *
      * @param mixed $value
      * @return boolean
@@ -17,22 +26,5 @@ class FloatRule implements SimpleRuleInterface
     public function validate($value)
     {
         return (bool)filter_var($value, \FILTER_VALIDATE_FLOAT);
-    }
-
-    /**
-     * Gets the error message for this rule.
-     *
-     * @param mixed $customMessage
-     * @return string
-     */
-    public function getMessage($customMessage = null)
-    {
-        if (!empty($customMessage)) {
-            $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
-        }
-
-        return $message;
     }
 }

@@ -2,14 +2,23 @@
 
 namespace Forestry\FormValidator\Rule;
 
+use Forestry\FormValidator\MessageTrait;
 use Forestry\FormValidator\ParameterRuleInterface;
 
 class MinRule implements ParameterRuleInterface
 {
-    private $defaultMessage = 'value to short';
+    use MessageTrait;
 
     /**
-     * Validates if the value is valid alphanumerical value.
+     * Set default message for this rule.
+     */
+    public function __construct()
+    {
+        $this->defaultMessage = 'value to short';
+    }
+
+    /**
+     * Validates if the value has the minimum length.
      *
      * @param mixed $value
      * @param integer $length
@@ -18,22 +27,5 @@ class MinRule implements ParameterRuleInterface
     public function validate($value, $length)
     {
         return ($length <= strlen(trim($value)));
-    }
-
-    /**
-     * Gets the error message for this rule.
-     *
-     * @param mixed $customMessage
-     * @return string
-     */
-    public function getMessage($customMessage = null)
-    {
-        if (!empty($customMessage)) {
-            $message = $customMessage;
-        } else {
-            $message = $this->defaultMessage;
-        }
-
-        return $message;
     }
 }
