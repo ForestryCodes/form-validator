@@ -30,9 +30,10 @@ class DateRule implements ParameterRuleInterface
         if (is_null($format)) {
             $format = $this->defaultFormat;
         }
-        $date = \DateTime::createFromFormat($format, $value);
-        $warnings = \DateTime::getLastErrors()['warning_count'];
-        $errors = \DateTime::getLastErrors()['error_count'];
+        $date = new \DateTime();
+        $date->createFromFormat($format, $value);
+        $warnings = $date->getLastErrors()['warning_count'];
+        $errors = $date->getLastErrors()['error_count'];
 
         return $date && 0 == $warnings && 0 == $errors;
     }
