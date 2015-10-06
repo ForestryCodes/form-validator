@@ -1,9 +1,9 @@
-# Forestry Log
+# Forestry Form validator
 
 [![Latest Version](https://img.shields.io/github/release/ForestryCodes/form-validator.svg?style=flat-square)](https://github.com/ForestryCodes/form-validator/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Build Status](https://img.shields.io/travis/ForestryCodes/form-validator/master.svg?style=flat-square)](https://travis-ci.org/ForestryCodes/log)
-[![Codacy Badge](https://www.codacy.com/project/badge/fee5eb49eb604e1697d756d433f3ecd8](https://www.codacy.com/app/forestrycodes/form-validator)
+[![Codacy Badge](https://www.codacy.com/project/badge/fee5eb49eb604e1697d756d433f3ecd8)](https://www.codacy.com/app/forestrycodes/form-validator)
 [![Total Downloads](https://img.shields.io/packagist/dt/forestry/form-validator.svg?style=flat-square)](https://packagist.org/packages/forestry/form-validator)
 
 Library to validate form data based on rules.
@@ -12,7 +12,7 @@ Library to validate form data based on rules.
 Via Composer
 
 ```bash
-$ composer require forestry/log
+$ composer require forestry/form-validator
 ```
 
 ## Usage

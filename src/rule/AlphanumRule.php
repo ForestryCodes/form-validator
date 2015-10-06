@@ -25,6 +25,6 @@ class AlphanumRule implements SimpleRuleInterface
      */
     public function validate($value)
     {
-        return (bool)preg_match('/^[\pL\pN \.-]+$/', $value);
+        return (bool)preg_match('/^[\pL\pN \.-]+$/u', $value);
     }
 }
