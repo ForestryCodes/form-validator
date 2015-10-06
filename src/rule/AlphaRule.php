@@ -25,6 +25,6 @@ class AlphaRule implements SimpleRuleInterface
      */
     public function validate($value)
     {
-        return (bool)preg_match('/^[\pL \.-]+$/', $value);
+        return (bool)preg_match('/^[\pL \.-]+$/u', $value);
     }
 }
