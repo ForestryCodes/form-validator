@@ -20,7 +20,8 @@ class AlphaRuleTest extends \PHPUnit_Framework_TestCase
 
     public function testValueIsValid()
     {
-        $result = $this->rule->validate('This contains text only - no numbers.');
+        $result = $this->rule->validate('This contains text only - no numbers. ' .
+            'And it has some special chars ÄÖÜßäüö');
 
         $this->assertTrue($result);
     }
